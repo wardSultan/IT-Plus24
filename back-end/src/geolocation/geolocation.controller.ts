@@ -1,15 +1,6 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { GeolocationService } from './geolocation.service';
 import { CreateGeolocationDto } from './dto/create-geolocation.dto';
-import { UpdateGeolocationDto } from './dto/update-geolocation.dto';
 
 @Controller('geolocation')
 export class GeolocationController {
@@ -18,28 +9,5 @@ export class GeolocationController {
   @Post()
   create(@Body() createGeolocationDto: CreateGeolocationDto) {
     return this.geolocationService.create(createGeolocationDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.geolocationService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.geolocationService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateGeolocationDto: UpdateGeolocationDto,
-  ) {
-    return this.geolocationService.update(+id, updateGeolocationDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.geolocationService.remove(+id);
   }
 }

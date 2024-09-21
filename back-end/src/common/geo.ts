@@ -1,20 +1,23 @@
+import { NotFoundException } from '@nestjs/common';
 import axios from 'axios';
+import { GeolocationDto } from 'src/geolocation/dto/create-geolocation.dto';
 
-export const geoFetch = async (
-  address: string,
-): Promise<{ lat: string; lon: string }> => {
+export const geoFetch = async (address: string): Promise<GeolocationDto> => {
   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
 
   const data = await axios
     .get(url)
     .then((response) => {
       const location = response.data[0];
-      console.log(`Geolocation: ${location.lat}, ${location.lon}`);
+
+      location.lat && location.lon;
+
       return location;
     })
+
     .catch((error) => {
-      console.error('Error fetching data:', error);
+      throw new NotFoundException(`Address: ${address} not found`);
     });
 
-  return { lat: data['lat'], lon: data['lon'] };
+  return { address: address, lat: data['lat'], lon: data['lon'] };
 };

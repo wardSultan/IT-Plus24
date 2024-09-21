@@ -8,11 +8,11 @@ import { GeolocationModule } from './geolocation/geolocation.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost', //127.0.0.1
-      port: 3306, //3306
-      username: 'root',
-      password: 'ward123',
-      database: 'mydb',
+      host: process.env.HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE_NAME,
       autoLoadEntities: true,
       synchronize: true,
     }),
