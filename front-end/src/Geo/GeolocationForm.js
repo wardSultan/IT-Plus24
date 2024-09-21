@@ -1,7 +1,6 @@
-// src/GeolocationForm.js
 import React, { useState } from "react";
 import axios from "axios";
-import "./GeolocationForm.css"; // لاستيراد أنماط CSS
+import "./GeolocationForm.css";
 
 const GeolocationForm = () => {
   const [address, setAddress] = useState("");
